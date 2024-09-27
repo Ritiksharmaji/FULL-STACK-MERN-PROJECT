@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import { InnerLayout } from '../../styles/Layouts';
 
 function Dashboard(){
 
     return(
         <DashboardStyled>
-            Dashboard page
+            <InnerLayout>
+                Dashboard page
+            </InnerLayout>
         </DashboardStyled>
     )
 }

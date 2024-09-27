@@ -4,15 +4,17 @@ import bg from './img/bg.png'
 import {MainLayout} from './styles/Layouts'
 import Orb from './Components/Orb/Orb'
 import Navigation from './Components/Navigation/Navigation'
-
 import Dashboard from './Components/Dashboard/Dashboard';
 import Income from './Components/Income/Income';
 import Expenses from './Components/Expenses/Expenses';
+import { useGlobalContext } from './context/globalContext';
 
 function App() {
   const [active, setActive] = useState(1)
 
-
+// to get the global value
+ const global =  useGlobalContext()
+ console.log(global)
   // to display the data in right side
   const displayData = () => {
     switch(active){
@@ -40,8 +42,8 @@ function App() {
       <MainLayout>
         <Navigation active={active} setActive={setActive} />
         <main>
-          <h1>hello how are you</h1>
-          <p>i ma fine</p>
+          {/* <h1>hello how are you</h1>
+          <p>i ma fine</p> */}
           {displayData()}
         </main>
       </MainLayout>

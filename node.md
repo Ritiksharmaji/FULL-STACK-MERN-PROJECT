@@ -357,3 +357,8 @@ diplay the data in right side
 ![alt text](image-2.png)
 ![alt text](image-3.png)
 ![alt text](image-4.png)
+
+-------------------------------------
+----working with income--------
+write the code for income here for income to acces it as globlally we are creating a file called as globalContext.js inside he context folder.
+
