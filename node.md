@@ -250,5 +250,110 @@ console.log(income);
 
 This structure is a typical pattern for a REST API in an Express application where the data is validated and stored in a MongoDB database.
 
-------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
+--------------------------for front-end-------------------------------------------------------------------------------
+1) create a frontend reactproject
+2) clear the codes 
+3) write the commands as : npm install axios chart.js moment react-chartjs-2 react-datepicker styled-components
 
+explainging of this commnds--------
+
+ Here’s a breakdown of each of the npm packages you are installing with the command `npm install axios chart.js moment react-chartjs-2 react-datepicker styled-components`:
+
+### 1. **axios**
+   - **Description**: `axios` is a popular HTTP client for making requests, especially for APIs. It supports promises, which allows asynchronous HTTP requests and handling responses easily.
+   - **Common Use Case**: Fetching data from APIs (e.g., `GET`, `POST` requests).
+   - **Example**:
+     ```js
+     import axios from 'axios';
+
+     axios.get('/api/data')
+       .then(response => console.log(response.data))
+       .catch(error => console.error(error));
+     ```
+
+### 2. **chart.js**
+   - **Description**: `chart.js` is a versatile library used for creating various types of charts (like bar, line, radar, etc.). It provides simple configuration options for customization.
+   - **Common Use Case**: Visualizing data in charts and graphs in web applications.
+   - **Example**:
+     ```js
+     const data = {
+       labels: ['January', 'February', 'March'],
+       datasets: [
+         {
+           label: 'Sales',
+           data: [30, 50, 40],
+           backgroundColor: 'rgba(75, 192, 192, 0.2)',
+         },
+       ],
+     };
+     ```
+
+### 3. **moment**
+   - **Description**: `moment` is a date manipulation library. It simplifies working with dates and times, including parsing, formatting, and validating.
+   - **Common Use Case**: Displaying, formatting, or calculating time and dates in various formats.
+   - **Example**:
+     ```js
+     import moment from 'moment';
+
+     const now = moment().format('MMMM Do YYYY, h:mm:ss a');
+     console.log(now); // Outputs: September 27th 2024, 2:45 pm
+     ```
+
+### 4. **react-chartjs-2**
+   - **Description**: `react-chartjs-2` is a React wrapper for `chart.js`, making it easier to integrate charts into React components.
+   - **Common Use Case**: Building reusable chart components in a React application.
+   - **Example**:
+     ```js
+     import { Line } from 'react-chartjs-2';
+
+     const MyChart = () => {
+       const data = { /* chart data */ };
+       return <Line data={data} />;
+     };
+     ```
+
+### 5. **react-datepicker**
+   - **Description**: `react-datepicker` is a lightweight date picker component for React applications. It provides a user-friendly calendar for selecting dates.
+   - **Common Use Case**: Implementing a date picker field for forms.
+   - **Example**:
+     ```js
+     import DatePicker from 'react-datepicker';
+     import 'react-datepicker/dist/react-datepicker.css';
+     
+     const MyComponent = () => {
+       const [selectedDate, setSelectedDate] = useState(null);
+       return <DatePicker selected={selectedDate} onChange={date => setSelectedDate(date)} />;
+     };
+     ```
+
+### 6. **styled-components**
+   - **Description**: `styled-components` is a popular CSS-in-JS library for styling React components. It allows you to write actual CSS code within your JavaScript and bind styles directly to components.
+   - **Common Use Case**: Creating dynamic, reusable styles for React components.
+   - **Example**:
+     ```js
+     import styled from 'styled-components';
+
+     const Button = styled.button`
+       background: blue;
+       color: white;
+       padding: 10px 20px;
+     `;
+     ```
+
+By using these packages, you can easily build a React-based app with charts, date pickers, styled components, and seamless HTTP requests.
+
+
+-------------------------
+4) create folder components,utils, context, styles
+5) create Global 
+6) use the google fonts to style the font style. and paste those syle in public/index.html.
+   ![alt text](image.png)
+   
+
+---------------------------------------------
+diplay the data in right side
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
