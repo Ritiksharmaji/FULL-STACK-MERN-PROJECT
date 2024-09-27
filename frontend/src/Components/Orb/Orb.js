@@ -1,16 +1,13 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-//impoting the custome hook for window size fix.
 import { useWindowSize } from '../../utils/useWindowSize';
 
 function Orb() {
 
-    // to get the width and height of view port 
     const {width, height} = useWindowSize()
 
     console.log(width, height)
 
-    // to apply the animation
     const moveOrb = keyframes`
         0%{
             transform: translate(0, 0);
@@ -31,7 +28,7 @@ function Orb() {
         margin-left: -37vh;
         margin-top: -37vh;
         background: linear-gradient(180deg, #F56692 0%, #F2994A 100%);
-        filter: blur(300px);
+        filter: blur(400px);
         animation: ${moveOrb} 15s alternate linear infinite;
     `;
 

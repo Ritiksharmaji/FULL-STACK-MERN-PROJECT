@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-// creating a custome hook to define or fix the window size.
+
 export const useWindowSize = () =>{
     const [size, setSize] = useState([window.innerWidth, window.innerHeight])
 
@@ -12,9 +12,6 @@ export const useWindowSize = () =>{
 
         return () => window.removeEventListener('resize', updateSize)
     }, [])
-
-    // [] is dependecy array
-
 
     return {
         width: size[0],
