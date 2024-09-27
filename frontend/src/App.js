@@ -1,25 +1,22 @@
-import logo from './logo.svg';
+import styled from "styled-components";
+import bg from './img/bg.png'
 import './App.css';
+import { MainLayout } from "./styles/Layouts";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <AppStyled bg={bg} className="App">
+    <MainLayout>
+      <h1>hello how are you </h1>
+      </MainLayout>
+   </AppStyled>
+    
   );
 }
+
+const AppStyled  = styled.div`
+height:100vh;
+background-image:url(${props=>props.bg});
+postion:relative`;
 
 export default App;
