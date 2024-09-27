@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import { InnerLayout } from "../../styles/Layouts";
+import Form from "../Form/Form";
 
 function Income(){
 
@@ -14,7 +15,7 @@ function Income(){
 
             </div>
             <div className="incomes">
-                
+                <Form/>
             </div>
            </div>
             </InnerLayout>

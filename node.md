@@ -362,3 +362,22 @@ diplay the data in right side
 ----working with income--------
 write the code for income here for income to acces it as globlally we are creating a file called as globalContext.js inside he context folder.
 
+
+![alt text](image-5.png)
+![alt text](image-6.png)
+![alt text](image-7.png)
+
+--------------
+adding the form folder to create a form file which stored the icome value 
+1) to apply the date we are importing the import DatePicker from 'react-datepicker'
+   in the Form.js
+
+![alt text](image-8.png)
+here we are just addding the income details using the income.js and form etc. and below are the screen short details.
+but before that you must have to run the backend and front end both application should be run ok otherwise it will give the error.
+
+![alt text](image-9.png)
+![alt text](image-10.png)
+![alt text](image-11.png)
+![this is to display the inserted data of income in postman](image-12.png)
+![this is to display the inserted data of income in mongoDb](image-13.png)

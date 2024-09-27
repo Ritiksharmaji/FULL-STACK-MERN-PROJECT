@@ -14,24 +14,35 @@ export const GlobalProvider = ({children}) => {
 
     //calculate incomes
     const addIncome = async (income) => {
-        const response = await axios
-            .post(`${BASE_URL}add-income`, income)
-            .catch((err) =>{
-                setError(err.response.data.message)
-            })
-        getIncomes()
-    }
-
+        try {
+            const response = await axios.post(`${BASE_URL}add-income`, income);
+            if (response && response.data) {
+                getIncomes(); // Fetch the updated list of incomes
+            } else {
+                setError("Failed to add income. No response data.");
+            }
+        } catch (err) {
+            setError(err.response?.data?.message || 'Error occurred while adding income');
+        }
+    };
+    
     const getIncomes = async () => {
-        const response = await axios
-            .get(`${BASE_URL}get-incomes`)
-        setIncomes(response.data)
-        console.log(response.data)
-    }
-
+        try {
+            const response = await axios.get(`${BASE_URL}get-incomes`);
+            if (response && response.data) {
+                setIncomes(response.data);
+            } else {
+                setError("Failed to fetch incomes. No response data.");
+            }
+        } catch (err) {
+            setError(err.response?.data?.message || 'Error occurred while fetching incomes');
+        }
+    };
+    
 
     return (
-        <GlobalContext.Provider value={`"heloo`}>
+        <GlobalContext.Provider value={
+            {addIncome, getIncomes }}>
             {children}
         </GlobalContext.Provider>
     )

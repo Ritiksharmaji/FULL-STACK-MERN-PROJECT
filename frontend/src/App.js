@@ -30,8 +30,6 @@ function App() {
         return <Dashboard />
     }
   }
-
-
   const orbMemo = useMemo(() => {
     return <Orb />
   },[])
@@ -50,7 +48,6 @@ function App() {
     </AppStyled>
   );
 }
-
 const AppStyled = styled.div`
   height: 100vh;
   background-image: url(${props => props.bg});
