@@ -392,8 +392,17 @@ but before that you must have to run the backend and front end both application 
 to design the form button we are creating a button file and design it
 
 ------------------------------------------------------------------------------------------------------------
-to display the income
+------------------------------to display the income------------------------------------------------
 
 ![fill the data](image-14.png)
 ![to show the inseted data](image-15.png)
 ![postman to show the insert data ](image-16.png)
+
+---------------------------------------------------------------------------------------------------------
+-------------------------------to delete the incomes----------------------------------------
+
+![before delete the of today icome](image-17.png)
+![after delete that on](image-18.png)
+![after delete that that today income postman](image-19.png)
+
+-----------------------------------------------------------------------------------------------------------
