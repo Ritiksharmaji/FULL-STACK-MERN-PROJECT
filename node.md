@@ -251,6 +251,8 @@ console.log(income);
 This structure is a typical pattern for a REST API in an Express application where the data is validated and stored in a MongoDB database.
 
 -----------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
 --------------------------for front-end-------------------------------------------------------------------------------
 1) create a frontend reactproject
 2) clear the codes 
@@ -273,13 +275,14 @@ explainging of this commnds--------
      ```
 
 ### 2. **chart.js**
-   - **Description**: `chart.js` is a versatile library used for creating various types of charts (like bar, line, radar, etc.). It provides simple configuration options for customization.
+   - **Description**: `chart.js` is a versatile library used for creating various types of charts (like bar, line, radar, etc.). 
+   - It provides simple configuration options for customization.
    - **Common Use Case**: Visualizing data in charts and graphs in web applications.
    - **Example**:
      ```js
      const data = {
        labels: ['January', 'February', 'March'],
-       datasets: [
+       datasets: [ 
          {
            label: 'Sales',
            data: [30, 50, 40],
@@ -348,11 +351,14 @@ By using these packages, you can easily build a React-based app with charts, dat
 4) create folder components,utils, context, styles
 5) create Global 
 6) use the google fonts to style the font style. and paste those syle in public/index.html.
-   ![alt text](image.png)
+   ![for google font-style](image.png)
    
+7) we are creating the left side componet that is sidebar.
 
 ---------------------------------------------
-diplay the data in right side
+8) to create the right side compoents
+9) 
+to diplay the data in right side
 ![alt text](image-1.png)
 ![alt text](image-2.png)
 ![alt text](image-3.png)
@@ -385,3 +391,9 @@ but before that you must have to run the backend and front end both application 
 ----------------
 to design the form button we are creating a button file and design it
 
+------------------------------------------------------------------------------------------------------------
+to display the income
+
+![fill the data](image-14.png)
+![to show the inseted data](image-15.png)
+![postman to show the insert data ](image-16.png)

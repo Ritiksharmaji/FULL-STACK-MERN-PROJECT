@@ -1,6 +1,7 @@
 project note
 ---
-what is npm i express mongoose cors nodemon  dotenv
+-------------------what is npm i express mongoose cors nodemon  dotenv--------------------------------------------------
+
 The command `npm i express mongoose cors nodemon dotenv` installs several packages commonly used in Node.js applications. Each of these packages serves a specific purpose. Here's what each one does:
 
 ### 1. **`express`**

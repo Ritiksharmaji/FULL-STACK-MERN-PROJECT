@@ -38,11 +38,13 @@ export const GlobalProvider = ({children}) => {
             setError(err.response?.data?.message || 'Error occurred while fetching incomes');
         }
     };
+
+    
     
 
     return (
         <GlobalContext.Provider value={
-            {addIncome, getIncomes }}>
+            {addIncome, getIncomes, incomes, }}>
             {children}
         </GlobalContext.Provider>
     )
