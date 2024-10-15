@@ -95,6 +95,15 @@ export const GlobalProvider = ({children}) => {
 
         return history.slice(0, 3)
     }
+    
+    const transactionHistoryAll = () => {
+        const history = [...incomes, ...expenses]
+        history.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt)
+        })
+
+        return history.slice(0, history.length)
+    }
 
     
 
@@ -112,6 +121,7 @@ export const GlobalProvider = ({children}) => {
                 totalExpenses,
                 totalBalance,
                 transactionHistory,
+                transactionHistoryAll,
                 error,
                 setError
             }}>
