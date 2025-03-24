@@ -444,3 +444,389 @@ module.exports = {db}
 -------------explaining------------------------
 
 
+-------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------globalContext.js details-----------------------------------------
+
+This is a React component that sets up a global context to manage state and provide utility functions for handling incomes and expenses. Here's an explanation of each part of the code:
+
+### 1. **GlobalContext Creation**
+   ```js
+   const GlobalContext = React.createContext();
+   ```
+   This creates a new context object using `React.createContext()`. The context will store and provide data related to incomes and expenses throughout the application. 
+
+### 2. **GlobalProvider Component**
+   ```js
+   export const GlobalProvider = ({ children }) => {
+       const [incomes, setIncomes] = useState([]);
+       const [expenses, setExpenses] = useState([]);
+       const [error, setError] = useState(null);
+   ```
+   - **State management**:
+     - `incomes`: Stores the list of income objects fetched from the backend.
+     - `expenses`: Not currently used in the code, but can be used similarly to track expense data.
+     - `error`: Stores error messages for API calls.
+   - This component acts as a "provider" that wraps the rest of your app and provides access to the `GlobalContext` values and functions to its children.
+
+### 3. **Functions in GlobalProvider**
+
+   #### a. **`addIncome`**
+   ```js
+   const addIncome = async (income) => {
+       try {
+           const response = await axios.post(`${BASE_URL}add-income`, income);
+           if (response && response.data) {
+               getIncomes(); // Refreshes the incomes list
+           } else {
+               setError("Failed to add income. No response data.");
+           }
+       } catch (err) {
+           setError(err.response?.data?.message || 'Error occurred while adding income');
+       }
+   };
+   ```
+   This function adds a new income by making a `POST` request to the backend with the provided `income` object. After a successful request, it calls `getIncomes` to refresh the list of incomes. If an error occurs, it sets the `error` state.
+
+   #### b. **`getIncomes`**
+   ```js
+   const getIncomes = async () => {
+       try {
+           const response = await axios.get(`${BASE_URL}get-incomes`);
+           if (response && response.data) {
+               setIncomes(response.data);
+           } else {
+               setError("Failed to fetch incomes. No response data.");
+           }
+       } catch (err) {
+           setError(err.response?.data?.message || 'Error occurred while fetching incomes');
+       }
+   };
+   ```
+   This function fetches the list of incomes from the backend using a `GET` request and updates the `incomes` state with the retrieved data. If it fails, it sets an error message.
+
+   #### c. **`deleteIncome`**
+   ```js
+   const deleteIncome = async (id) => {
+       const res = await axios.delete(`${BASE_URL}delete-income/${id}`);
+       getIncomes(); // Refresh the list after deletion
+   };
+   ```
+   Deletes an income by making a `DELETE` request to the backend with the `id` of the income to be deleted. Afterward, it refreshes the income list by calling `getIncomes`.
+
+   #### d. **`totalIncome`**
+   ```js
+   const totalIncome = () => {
+       let totalIncome = 0;
+       incomes.forEach((income) => {
+           totalIncome += income.amount;
+       });
+       return totalIncome;
+   };
+   ```
+   This function calculates the total sum of all income amounts stored in the `incomes` state by looping through each income and summing up the amounts.
+
+### 4. **Providing Context**
+   ```js
+   return (
+       <GlobalContext.Provider value={{ addIncome, getIncomes, incomes, deleteIncome, totalIncome }}>
+           {children}
+       </GlobalContext.Provider>
+   );
+   ```
+   The `GlobalProvider` component wraps its children (i.e., the rest of the app components) in the `GlobalContext.Provider` and passes the necessary functions and states via the `value` prop. These values will be accessible to any component that consumes the `GlobalContext`.
+
+### 5. **Custom Hook for Consuming the Context**
+   ```js
+   export const useGlobalContext = () => {
+       return useContext(GlobalContext);
+   };
+   ```
+   This is a custom hook that allows other components to easily access the values and functions provided by `GlobalContext` using the `useGlobalContext` function.
+
+### Key Features:
+- **API Integration**: This code interacts with a backend through API calls to manage income data (add, fetch, and delete).
+- **State Management**: It uses React's `useState` to manage the `incomes`, `expenses`, and `error` states.
+- **Error Handling**: It provides error messages when the API fails, which could be displayed in the UI for a better user experience.
+- **Context API**: This component provides a global context, allowing other components to access and manipulate incomes globally without having to pass props down through the component tree.
+
+Let me know if you need further details or clarification!
+
+-------------------------------------------------------------------------------------------------------------------
+-------------------app.js-------------------------------------------------
+
+This React component (`App`) is the main entry point for your application. It manages global context, handles navigation between different sections (e.g., Dashboard, Income, Expenses), and applies some styles. Here's a detailed explanation of each part of the code:
+
+### 1. **Imports**
+```js
+import React, {useState, useMemo} from 'react';
+import styled from "styled-components";
+import bg from './img/bg.png';
+import {MainLayout} from './styles/Layouts';
+import Orb from './Components/Orb/Orb';
+import Navigation from './Components/Navigation/Navigation';
+import Dashboard from './Components/Dashboard/Dashboard';
+import Income from './Components/Income/Income';
+import Expenses from './Components/Expenses/Expenses';
+import { useGlobalContext } from './context/globalContext';
+```
+- **React & Hooks**: `useState` manages component-level state, and `useMemo` memoizes expensive calculations to avoid unnecessary re-renders.
+- **styled-components**: `styled-components` is used to style the component with CSS-in-JS syntax.
+- **bg**: Imports a background image for styling purposes.
+- **Other Components**: The app relies on other components like `Orb`, `Navigation`, `Dashboard`, `Income`, and `Expenses` to compose the interface.
+- **Global Context**: `useGlobalContext` allows you to access the global state and functions from the context created in the `globalContext`.
+
+### 2. **State Management**
+```js
+const [active, setActive] = useState(1);
+```
+- **`active`**: Tracks which section (e.g., Dashboard, Income, Expenses) is currently active. The value `1` represents the default active section, which is `Dashboard` by default.
+
+### 3. **Accessing Global Context**
+```js
+const global = useGlobalContext();
+console.log(global);
+```
+- **Global Context Access**: You are using `useGlobalContext()` to access the values and functions (like `addIncome`, `getIncomes`, `deleteIncome`, etc.) defined in the `GlobalProvider` from your context file.
+- **Logging**: The `global` context is logged for debugging purposes, allowing you to inspect the values provided by the global context.
+
+### 4. **Display Data Based on Active State**
+```js
+const displayData = () => {
+  switch(active){
+    case 1:
+      return <Dashboard />;
+    case 2:
+      return <Dashboard />;
+    case 3:
+      return <Income />;
+    case 4:
+      return <Expenses />;
+    default:
+      return <Dashboard />;
+  }
+};
+```
+- **`displayData` function**: This function controls what component is displayed in the main content area based on the `active` state. It returns the appropriate component depending on the current value of `active`:
+  - `1` or `2`: Shows the `Dashboard`.
+  - `3`: Shows the `Income` component.
+  - `4`: Shows the `Expenses` component.
+  - By default, it returns the `Dashboard`.
+
+### 5. **Memoizing the Orb Component**
+```js
+const orbMemo = useMemo(() => {
+  return <Orb />;
+}, []);
+```
+- **`useMemo`**: The `Orb` component is memoized using `useMemo` to prevent unnecessary re-renders. Since the dependencies array is empty (`[]`), the `Orb` component will only be rendered once, unless its dependencies change.
+
+### 6. **Rendering the Component**
+```js
+return (
+  <AppStyled bg={bg} className="App">
+    {orbMemo}
+    <MainLayout>
+      <Navigation active={active} setActive={setActive} />
+      <main>
+        {displayData()}
+      </main>
+    </MainLayout>
+  </AppStyled>
+);
+```
+- The component renders:
+  - **`orbMemo`**: The memoized `Orb` component is rendered at the top.
+  - **`MainLayout`**: This wraps both the navigation and the main content area.
+  - **`Navigation`**: The `Navigation` component is passed `active` and `setActive` as props. This allows the user to switch between different sections.
+  - **`main`**: Displays the data returned from the `displayData` function based on the `active` state.
+
+### 7. **Styled Component for App Container**
+```js
+const AppStyled = styled.div`
+  height: 100vh;
+  background-image: url(${props => props.bg});
+  position: relative;
+  main{
+    flex: 1;
+    background: rgba(252, 246, 249, 0.78);
+    border: 3px solid #FFFFFF;
+    backdrop-filter: blur(4.5px);
+    border-radius: 32px;
+    overflow-x: hidden;
+    &::-webkit-scrollbar{
+      width: 0;
+    }
+  }
+`;
+```
+- **Styled Component (`AppStyled`)**: This CSS-in-JS style block is used to style the `App` component.
+  - **Background Image**: Sets the background to the image (`bg`) imported at the top.
+  - **Positioning**: The entire container is set to take up the full viewport height (`100vh`) and has a `relative` positioning.
+  - **Main Element Styling**: Inside the `main` tag:
+    - It has a blurred background with a border and rounded corners.
+    - The scrollbar is hidden using `&::-webkit-scrollbar { width: 0; }`.
+
+### Key Features:
+- **Context Integration**: The app uses `useGlobalContext` to access global states and functions like income and expense management.
+- **Dynamic Content Rendering**: The app dynamically switches between different components (Dashboard, Income, Expenses) based on the active state managed with `useState`.
+- **Performance Optimization**: The `Orb` component is memoized to prevent unnecessary renders using `useMemo`.
+- **Styled Components**: The app is styled using `styled-components`, giving it a modern and reusable styling approach.
+
+This is the basic structure of your app, which integrates global state management, navigation, and dynamic content rendering. Let me know if you need further clarification!
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------income.js------------------------------------------------------------------------
+This `Income` component in React manages and displays a list of incomes, including a form to add a new income entry and a breakdown of the total income. Let's go over it step-by-step:
+
+### 1. **Imports**
+```js
+import React, { useEffect } from "react";
+import styled from "styled-components";
+import { InnerLayout } from "../../styles/Layouts";
+import Form from "../Form/Form";
+import { useGlobalContext } from "../../context/globalContext";
+import IncomeItem from "../IncomeItem/IncomeItem";
+```
+- `React` and `useEffect`: You use `React` to build the component, and `useEffect` to perform side effects (like fetching data when the component mounts).
+- `styled`: A CSS-in-JS library to style components with `styled-components`.
+- `InnerLayout`: A layout component (assumed to handle layout styling like margins/paddings).
+- `Form`: A component to add new income data.
+- `useGlobalContext`: A custom hook to access the global state and functions from the context API.
+- `IncomeItem`: A component to display individual income entries.
+
+### 2. **Using Global Context**
+```js
+const { addIncome, incomes, getIncomes, totalIncome, deleteIncome } = useGlobalContext();
+```
+- `useGlobalContext()` is used to pull data and functions from the global context. Here’s what each does:
+  - `addIncome`: Function to add new income to the list.
+  - `incomes`: Array of income data fetched from the backend.
+  - `getIncomes`: Function that fetches income data from the backend.
+  - `totalIncome`: Function that calculates the total income.
+  - `deleteIncome`: Function to delete an income entry by ID.
+
+### 3. **useEffect for Fetching Data**
+```js
+useEffect(() => {
+    getIncomes();    
+}, []);
+```
+- `useEffect` is used here to **fetch the list of incomes** when the component first mounts. 
+- The empty dependency array (`[]`) ensures this effect runs only once, similar to `componentDidMount` in class components.
+- `getIncomes()` fetches income data from the backend and populates the `incomes` state.
+
+### 4. **Rendering the Component**
+```js
+return (
+    <IncomeStyled>
+        <InnerLayout>
+            <h2 className="total-income">
+                Total Income: <span>${totalIncome()}</span>
+            </h2>
+            <div className="income-content">
+                <div className="form-container">
+                    <Form />
+                </div>
+                <div className="incomes">
+                    {incomes.map((income) => {
+                        const { _id, title, amount, date, category, description, type } = income;
+                        return (
+                            <IncomeItem
+                                key={_id}
+                                id={_id}
+                                title={title}
+                                description={description}
+                                amount={amount}
+                                date={date}
+                                type={type}
+                                category={category}
+                                indicatorColor="var(--color-green)"
+                                deleteItem={deleteIncome}
+                            />
+                        );
+                    })}
+                </div>
+            </div>
+        </InnerLayout>
+    </IncomeStyled>
+);
+```
+- **Total Income**: 
+  - Displays the total income, calculated using `totalIncome()`, which sums up the amounts in the `incomes` array.
+  
+- **Form Component**: 
+  - `Form` allows users to input and submit new income entries. The form is rendered on the left side in `income-content`.
+  
+- **Income List**:
+  - The `incomes` array is iterated over using `.map()` to render each income entry.
+  - For each income, an `IncomeItem` component is created, passing in properties such as `title`, `amount`, `date`, and `category`. 
+  - `deleteItem={deleteIncome}` is passed to allow deleting an income item.
+
+### 5. **`IncomeItem` and Key Property**
+- Each income item gets a `key={_id}`. The `key` is required by React to efficiently manage lists and detect changes to items.
+  
+- The `IncomeItem` component likely renders the details of an income entry and provides functionality (like `deleteIncome`) to remove it.
+
+### 6. **Styling the Component**
+The `styled-components` library is used for styling:
+```js
+const IncomeStyled = styled.div`
+  display: flex;
+  overflow: auto;
+
+  .total-income {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FCF6F9;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-size: 2rem;
+    gap: .5rem;
+    
+    span {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--color-green);
+    }
+  }
+
+  .income-content {
+    display: flex;
+    gap: 2rem;
+    
+    .incomes {
+      flex: 1;
+    }
+  }
+`;
+```
+- `IncomeStyled`: A wrapper around the component's structure, giving it a flexbox layout.
+  - `.total-income`: A section that shows the total income, centered with a styled background and rounded borders.
+  - `.income-content`: A flex container that separates the form and the list of incomes.
+
+### Key Takeaways:
+1. **State Management with Context**: This component gets its state (`incomes`) and functions (`getIncomes`, `addIncome`, `deleteIncome`) from the global context, centralizing the logic and allowing shared access across different components.
+  
+2. **Dynamic Rendering**: The incomes are dynamically rendered as a list with the `map()` function, displaying each income through the `IncomeItem` component.
+  
+3. **Modular Design**: The layout is divided into smaller components (`Form`, `IncomeItem`), following the principle of separation of concerns. 
+
+4. **Styling with `styled-components`**: Styles are applied directly to components using the CSS-in-JS approach, allowing for more dynamic and scoped styling without external CSS files. 
+
+This approach makes it easy to manage and scale both logic (with context) and presentation (with components and `styled-components`).
+
+---------------------------------------------------------------------------------------------------------------------------
+---------------------IncomeItem.js-------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------Form.js-----------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------------------------------
+--------------------------------Expensive part----------------------------------------------------------------------------------------------------------------

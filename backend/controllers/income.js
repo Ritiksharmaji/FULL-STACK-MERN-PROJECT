@@ -1,9 +1,8 @@
 
 
 const IncomeSchema= require("../models/IncomeModel")
-// exports.addIncome = async (req, res) => {
-//     console.log(req.body);   
-// }
+
+
 exports.addIncome = async (req, res) => {
     const {title, amount, category, description, date}  = req.body
     const income = IncomeSchema({
@@ -14,7 +13,7 @@ exports.addIncome = async (req, res) => {
         date
     })
     try {
-        //validations
+       
         if(!title || !category || !description || !date){
             return res.status(400)
             .json({message: 'All fields are required!'})
@@ -42,9 +41,8 @@ exports.getIncomes = async (req, res) =>{
 }
 
 exports.deleteIncome = async (req, res) =>{
-    // to the id from request body
     const {id} = req.params;
-    // here findByIdAndDelete(id) predefined function.
+   
     IncomeSchema.findByIdAndDelete(id)
         .then((income) =>{
             res.status(200).json({message: 'Income Deleted'})

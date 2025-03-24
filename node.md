@@ -406,3 +406,5 @@ to design the form button we are creating a button file and design it
 ![after delete that that today income postman](image-19.png)
 
 -----------------------------------------------------------------------------------------------------------
+----------------------------------globalContext.js details-----------------------------------------
+now the income and expensive both are almost same so we arerr copy the  code of income and paste it in Exprensive and change based on requred.
