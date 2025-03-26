@@ -1,0 +1,137 @@
+/* Main Container */
+.auth-container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  padding: 30px 15px;
+}
+
+/* Card Container */
+.auth-card {
+  display: flex;
+  flex-direction: column; /* Stack elements on small screens */
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 20px; /* Adjust padding */
+  width: 100%;
+  max-width: 400px; /* Set max width */
+}
+
+/* Form Section */
+.auth-form {
+  flex: 1;
+  padding: 30px 20px; /* Reduced padding */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.heading h2 {
+  color: #2d3748;
+  font-size: 22px; /* Reduce font size */
+  font-weight: 700;
+}
+
+.subheading {
+  color: #718096;
+  font-size: 12px; /* Reduce font size */
+  margin: 0;
+}
+
+/* Form Elements */
+.form-container {
+  width: 100%; /* Full width */
+  margin: 15px 0;
+}
+
+.input-container {
+  margin-bottom: 15px; /* Reduce margin */
+}
+
+.user-input {
+  width: 100%;
+  padding: 12px 15px; /* Reduce padding */
+  border: 1px solid #e2e8f0;
+  border-radius: 8px; /* Adjust rounded corners */
+  font-size: 14px;
+  background-color: #f8fafc;
+}
+
+/* Button Styles */
+.auth-button {
+  width: 100%;
+  padding: 12px; /* Reduce padding */
+  font-size: 14px; /* Reduce font size */
+}
+
+/* Error Message */
+.error-msg {
+  font-size: 12px; /* Reduce font size */
+}
+
+/* Terms */
+.terms {
+  font-size: 12px; /* Reduce font size */
+  text-align: center;
+}
+
+/* Social Login */
+.social-login {
+  margin-top: 15px;
+}
+
+.social-btn {
+  width: 100%;
+  padding: 10px; /* Reduce padding */
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .auth-form {
+    padding: 20px 15px;
+  }
+
+  .auth-button {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .user-input {
+    padding: 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading h2 {
+    font-size: 20px; /* Further reduce font size */
+  }
+
+  .subheading {
+    font-size: 11px;
+  }
+
+  .auth-button {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .user-input {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .terms {
+    font-size: 11px;
+  }
+}

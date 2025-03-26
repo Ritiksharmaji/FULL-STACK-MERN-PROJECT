@@ -1,8 +1,14 @@
 import React, { useContext, useState } from "react"
 import axios from 'axios'
 
-const BASE_URL = "http://localhost:5000/api/v1/";
+const BASE_URL = "http://localhost:5000/api/transactions/";
 
+const axiosInstance = axios.create({
+    baseURL: BASE_URL,
+    headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+});
 const GlobalContext = React.createContext()
 
 export const GlobalProvider = ({children}) => {
@@ -13,7 +19,7 @@ export const GlobalProvider = ({children}) => {
 
     const addIncome = async (income) => {
         try {
-            const response = await axios.post(`${BASE_URL}add-income`, income);
+            const response = await axiosInstance.post(`${BASE_URL}income`, income);
             if (response && response.data) {
                 getIncomes(); 
             } else {
@@ -26,7 +32,7 @@ export const GlobalProvider = ({children}) => {
     
     const getIncomes = async () => {
         try {
-            const response = await axios.get(`${BASE_URL}get-incomes`);
+            const response = await axiosInstance.get(`${BASE_URL}incomes`);
             if (response && response.data) {
                 setIncomes(response.data);
             } else {
@@ -38,7 +44,7 @@ export const GlobalProvider = ({children}) => {
     };
 
     const deleteIncome = async (id) => {
-        const res  = await axios.delete(`${BASE_URL}delete-income/${id}`)
+        const res  = await axiosInstance.delete(`${BASE_URL}income/${id}`)
         getIncomes()
     }
 
@@ -52,7 +58,7 @@ export const GlobalProvider = ({children}) => {
     }
 
     const addExpense = async (income) => {
-        const response = await axios.post(`${BASE_URL}add-expense`, income)
+        const response = await axiosInstance.post(`${BASE_URL}expense`, income)
             .catch((err) =>{
                 setError(err.response.data.message)
             })
@@ -60,13 +66,13 @@ export const GlobalProvider = ({children}) => {
     }
 
     const getExpenses = async () => {
-        const response = await axios.get(`${BASE_URL}get-expenses`)
+        const response = await axiosInstance.get(`${BASE_URL}expenses`)
         setExpenses(response.data)
         console.log(response.data)
     }
 
     const deleteExpense = async (id) => {
-        const res  = await axios.delete(`${BASE_URL}delete-expense/${id}`)
+        const res  = await axiosInstance.delete(`${BASE_URL}expense/${id}`)
         getExpenses()
     }
 
