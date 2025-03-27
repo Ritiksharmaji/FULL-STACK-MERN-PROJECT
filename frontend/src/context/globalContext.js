@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from 'axios';
 
-const BASE_URL = "http://localhost:5000/api/transactions/";
+// const BASE_URL = "http://localhost:5000/api/transactions/";
+const BASE_URL = "https://full-stack-mern-project-p5ay.vercel.app/api/transactions/";
 
 const GlobalContext = React.createContext();
 
