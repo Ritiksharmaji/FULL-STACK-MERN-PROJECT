@@ -44,9 +44,9 @@ function App() {
             <Navigation active={active} setActive={setActive} />
             <main>
               {active === 1 && <Dashboard />}
-              {active === 2 && <Income />}
-              {active === 3 && <Expenses />}
-              {active === 4 && <TransactionHistoryAll />}
+              {active === 2 && < TransactionHistoryAll/>}
+              {active === 3 && < Income/>}
+              {active === 4 && <Expenses />}
             </main>
             {orbMemo}
           </MainLayout>

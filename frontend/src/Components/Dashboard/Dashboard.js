@@ -1,24 +1,42 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
 import { useGlobalContext } from '../../context/globalContext';
-import History from '../../History/History';
-
 import { InnerLayout } from '../../styles/Layouts';
 import { dollar } from '../../utils/Icons';
 import Chart from '../Chart/Chart';
-import Navigation from '../Navigation/Navigation';
 
 function Dashboard() {
-    const {totalExpenses,incomes, expenses, totalIncome, totalBalance, getIncomes, getExpenses } = useGlobalContext()
+    const {
+        totalExpenses,
+        incomes, 
+        expenses, 
+        totalIncome, 
+        totalBalance, 
+        getIncomes, 
+        getExpenses,
+        error,
+        setError
+    } = useGlobalContext();
 
     useEffect(() => {
-        getIncomes()
-        getExpenses()
-    }, [])
+        getIncomes();
+        getExpenses();
+    }, []);
+
+    useEffect(() => {
+        if (error) {
+            alert(error);
+            setError(null);
+        }
+    }, [error]);
+
+    const minIncome = incomes.length > 0 ? Math.min(...incomes.map(item => item.amount)) : 0;
+    const maxIncome = incomes.length > 0 ? Math.max(...incomes.map(item => item.amount)) : 0;
+    const minExpense = expenses.length > 0 ? Math.min(...expenses.map(item => item.amount)) : 0;
+    const maxExpense = expenses.length > 0 ? Math.max(...expenses.map(item => item.amount)) : 0;
 
     return (
         <DashboardStyled>
-            
             <InnerLayout>
                 <h1>All Transactions</h1>
                 <div className="stats-con">
@@ -46,30 +64,29 @@ function Dashboard() {
                         </div>
                     </div>
                     <div className="history-con">
-                        {/* <History /> */}
-                        <h2 className="salary-title">Min <span>Salary</span>Max</h2>
+                        <h2 className="salary-title">Min <span>Salary</span> Max</h2>
                         <div className="salary-item">
                             <p>
-                                ${Math.min(...incomes.map(item => item.amount))}
+                                {dollar}{minIncome}
                             </p>
                             <p>
-                                ${Math.max(...incomes.map(item => item.amount))}
+                                {dollar}{maxIncome}
                             </p>
                         </div>
-                        <h2 className="salary-title">Min <span>Expense</span>Max</h2>
+                        <h2 className="salary-title">Min <span>Expense</span> Max</h2>
                         <div className="salary-item">
                             <p>
-                                ${Math.min(...expenses.map(item => item.amount))}
+                                {dollar}{minExpense}
                             </p>
                             <p>
-                                ${Math.max(...expenses.map(item => item.amount))}
+                                {dollar}{maxExpense}
                             </p>
                         </div>
                     </div>
                 </div>
             </InnerLayout>
         </DashboardStyled>
-    )
+    );
 }
 
 const DashboardStyled = styled.div`
@@ -147,4 +164,4 @@ const DashboardStyled = styled.div`
     }
 `;
 
-export default Dashboard
+export default Dashboard;

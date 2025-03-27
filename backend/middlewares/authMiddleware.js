@@ -4,7 +4,7 @@ const authenticateToken = (req, res, next) => {
     const authHeader = req.header('Authorization'); 
     if (!authHeader) return res.status(401).json({ error: 'Access Denied: No Token Provided' });
 
-    const token = authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : authHeader;
+    const token = authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : '';
 
     if (!token) return res.status(401).json({ error: 'Access Denied: Invalid Token' });
 
