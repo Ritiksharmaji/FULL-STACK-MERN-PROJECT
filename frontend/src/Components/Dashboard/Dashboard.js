@@ -30,10 +30,10 @@ function Dashboard() {
         }
     }, [error]);
 
-    const minIncome = incomes.length > 0 ? Math.min(...incomes.map(item => item.amount)) : 0;
-    const maxIncome = incomes.length > 0 ? Math.max(...incomes.map(item => item.amount)) : 0;
-    const minExpense = expenses.length > 0 ? Math.min(...expenses.map(item => item.amount)) : 0;
-    const maxExpense = expenses.length > 0 ? Math.max(...expenses.map(item => item.amount)) : 0;
+    // const minIncome = incomes.length > 0 ? Math.min(...incomes.map(item => item.amount)) : 0;
+    // const maxIncome = incomes.length > 0 ? Math.max(...incomes.map(item => item.amount)) : 0;
+    // const minExpense = expenses.length > 0 ? Math.min(...expenses.map(item => item.amount)) : 0;
+    // const maxExpense = expenses.length > 0 ? Math.max(...expenses.map(item => item.amount)) : 0;
 
     return (
         <DashboardStyled>
@@ -63,7 +63,7 @@ function Dashboard() {
                             </div>
                         </div>
                     </div>
-                    <div className="history-con">
+                    {/* <div className="history-con">
                         <h2 className="salary-title">Min <span>Salary</span> Max</h2>
                         <div className="salary-item">
                             <p>
@@ -82,7 +82,7 @@ function Dashboard() {
                                 {dollar}{maxExpense}
                             </p>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </InnerLayout>
         </DashboardStyled>
@@ -92,48 +92,39 @@ function Dashboard() {
 const DashboardStyled = styled.div`
     .stats-con{
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 2rem;
+
         .chart-con{
-            grid-column: 1 / 4;
             height: 400px;
             .amount-con{
                 display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 2rem;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
                 margin-top: 2rem;
-                .income, .expense{
-                    grid-column: span 2;
-                }
+
                 .income, .expense, .balance{
                     background: #FCF6F9;
                     border: 2px solid #FFFFFF;
                     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
                     border-radius: 20px;
                     padding: 1rem;
+                    text-align: center;
                     p{
-                        font-size: 3.5rem;
+                        font-size: 2.5rem;
                         font-weight: 700;
                     }
                 }
 
                 .balance{
-                    grid-column: 2 / 4;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
                     p{
-                        color: var(--color-green);
-                        opacity: 0.6;
-                        font-size: 4.5rem;
+                        font-size: 3rem;
                     }
                 }
             }
         }
 
         .history-con{
-            grid-column: 4 / -1;
             h2{
                 margin: 1rem 0;
                 display: flex;
@@ -141,9 +132,9 @@ const DashboardStyled = styled.div`
                 justify-content: space-between;
             }
             .salary-title{
-                font-size: 1.2rem;
+                font-size: 1rem;
                 span{
-                    font-size: 1.8rem;
+                    font-size: 1.5rem;
                 }
             }
             .salary-item{
@@ -157,11 +148,75 @@ const DashboardStyled = styled.div`
                 align-items: center;
                 p{
                     font-weight: 600;
-                    font-size: 1.6rem;
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .stats-con {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        .chart-con {
+            .amount-con {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .stats-con {
+            gap: 1rem;
+        }
+        .chart-con {
+            height: auto;
+            .amount-con {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                p {
+                    font-size: 2rem;
+                }
+            }
+        }
+        .history-con {
+            .salary-item {
+                flex-direction: column;
+                align-items: center;
+                p {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        .chart-con {
+            .amount-con {
+                grid-template-columns: 1fr;
+                p {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+        .history-con {
+            .salary-title {
+                font-size: 0.9rem;
+                span {
+                    font-size: 1.2rem;
+                }
+            }
+            .salary-item {
+                padding: 0.5rem;
+                p {
+                    font-size: 0.9rem;
                 }
             }
         }
     }
 `;
+
 
 export default Dashboard;

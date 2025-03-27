@@ -11,7 +11,6 @@ export const GlobalProvider = ({children}) => {
     const [expenses, setExpenses] = useState([]);
     const [error, setError] = useState(null);
     
-    // Create axios instance with current token
     const getAxiosInstance = () => {
         return axios.create({
             baseURL: BASE_URL,
