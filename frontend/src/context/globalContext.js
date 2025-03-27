@@ -17,9 +17,11 @@ export const GlobalProvider = ({children}) => {
     const [expenses, setExpenses] = useState([])
     const [error, setError] = useState(null)
 
+    console.log(localStorage.getItem("token"));
+    
     const addIncome = async (income) => {
         try {
-            const response = await axiosInstance.post(`${BASE_URL}income`, income);
+            const response = await axiosInstance.post(`income`, income);
             if (response && response.data) {
                 getIncomes(); 
             } else {
@@ -32,7 +34,7 @@ export const GlobalProvider = ({children}) => {
     
     const getIncomes = async () => {
         try {
-            const response = await axiosInstance.get(`${BASE_URL}incomes`);
+            const response = await axiosInstance.get(`incomes`);
             if (response && response.data) {
                 setIncomes(response.data);
             } else {
@@ -44,7 +46,7 @@ export const GlobalProvider = ({children}) => {
     };
 
     const deleteIncome = async (id) => {
-        const res  = await axiosInstance.delete(`${BASE_URL}income/${id}`)
+        const res  = await axiosInstance.delete(`income/${id}`)
         getIncomes()
     }
 
@@ -58,7 +60,7 @@ export const GlobalProvider = ({children}) => {
     }
 
     const addExpense = async (income) => {
-        const response = await axiosInstance.post(`${BASE_URL}expense`, income)
+        const response = await axiosInstance.post(`expense`, income)
             .catch((err) =>{
                 setError(err.response.data.message)
             })
@@ -66,13 +68,13 @@ export const GlobalProvider = ({children}) => {
     }
 
     const getExpenses = async () => {
-        const response = await axiosInstance.get(`${BASE_URL}expenses`)
+        const response = await axiosInstance.get(`expenses`)
         setExpenses(response.data)
         console.log(response.data)
     }
 
     const deleteExpense = async (id) => {
-        const res  = await axiosInstance.delete(`${BASE_URL}expense/${id}`)
+        const res  = await axiosInstance.delete(`expense/${id}`)
         getExpenses()
     }
 
