@@ -15,6 +15,7 @@ import RegisterForm from "./Pages/RegisterForm";
 import { AuthProvider } from "./context/AuthContext";
 import ForgotPassword from "./Pages/ForgetPasswordForm";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import NotFound from "./Pages/NotFound";
 
 function App() {
   const [active, setActive] = useState(1);
@@ -52,6 +53,8 @@ function App() {
               }
             />
           </Route>
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </AuthProvider>
