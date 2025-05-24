@@ -30,7 +30,7 @@ function Navigation({ active, setActive }) {
                 <img src={ritik} alt="Toggle Menu" />
             </MobileToggle>
             
-            {isMobileOpen && <Overlay onClick={toggleMobileMenu} />}
+           {isMobileOpen && <CloseButton onClick={() => setIsMobileOpen(false)}>×</CloseButton>}
 
             <SidebarContainer isMobileOpen={isMobileOpen}>
                 <Sidebar>
@@ -68,48 +68,25 @@ function Navigation({ active, setActive }) {
     );
 }
 
-const navbar = styled.nav`
-    position: relative;
-    width: 30%;
-    height: 100vh;
-    background: rgba(252, 246, 249, 0.95);
-    border: 3px solid #FFFFFF;`;
-
-const Overlay = styled.div`
-   
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 998;
-    display: none;
-
-    @media (max-width: 768px) {
-        display: block;
-    }
-`;
 
 const SidebarContainer = styled.div`
+    position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
     z-index: 999;
     transition: transform 0.3s ease-in-out;
-    
-    @media (max-width: 768px) {
-        transform: ${({ isMobileOpen }) => 
-            isMobileOpen ? 'translateX(0)' : 'translateX(-100%)'};
-    }
 
-    @media (max-width: 769px) {
-         position: fixed;
+    @media (max-width: 768px) {
+        width: 436px;
+        transform: ${({ isMobileOpen }) =>
+            isMobileOpen ? 'translateX(0)' : 'translateX(-100%)'};
     }
 `;
 
 const Sidebar = styled.nav`
     padding: 2rem 1.5rem;
-    width: 374px;
+    width: 100%;
     height: 100%;
     background: rgba(252, 246, 249, 0.95);
     border: 3px solid #FFFFFF;
@@ -121,8 +98,23 @@ const Sidebar = styled.nav`
     gap: 2rem;
 
     @media (max-width: 768px) {
-        width: 300px;
         border-radius: 0;
+        width: 100%; // use full container width (436px set in SidebarContainer)
+    }
+`;
+
+const Overlay = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    display: ${({ isMobileOpen }) => (isMobileOpen ? 'block' : 'none')};
+
+    @media (min-width: 769px) {
+        display: none;
     }
 `;
 
@@ -207,6 +199,17 @@ const MenuItem = styled.li`
 const BottomNav = styled.div`
     padding: 1rem 0 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
+`;
+const CloseButton = styled.div`
+    align-self: flex-end;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgba(34, 34, 96, 0.8);
+
+    @media (min-width: 769px) {
+        display: none;
+    }
 `;
 
 const MobileToggle = styled.div`
