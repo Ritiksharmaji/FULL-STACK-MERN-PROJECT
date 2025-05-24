@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Footer</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      background-color: #f2f2f2;
+      padding: 40px 60px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .footer-logo img {
+      width: 150px;
+    }
+
+    .footer-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-section h4 {
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #333;
+      text-transform: uppercase;
+    }
+
+    .footer-section a {
+      text-decoration: none;
+      font-size: 14px;
+      color: #666;
+      transition: color 0.3s;
+    }
+
+    .footer-section a:hover {
+      color: #000;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .social-icons a {
+      width: 30px;
+      height: 30px;
+      background-color: #8cc63f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: white;
+      font-size: 16px;
+      text-decoration: none;
+    }
+  </style>
+  <!-- Add Font Awesome for social icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <footer class="footer">
+    <div class="footer-logo">
+      <img src="https://i.imgur.com/aqGMb3a.png" alt="Fonzel Logo">
+    </div>
+
+    <div class="footer-section">
+      <h4>About Us</h4>
+      <a href="#">Life@fonzel</a>
+      <a href="#">Careers</a>
+      <a href="#">Article</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Disclaimer</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contact Us</h4>
+      <a href="#">Contact Information</a>
+      <a href="#">Customer Service</a>
+    </div>
+
+    <div class="footer-section">
+      <h4>Connect</h4>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

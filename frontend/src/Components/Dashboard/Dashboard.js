@@ -63,26 +63,7 @@ function Dashboard() {
                             </div>
                         </div>
                     </div>
-                    {/* <div className="history-con">
-                        <h2 className="salary-title">Min <span>Salary</span> Max</h2>
-                        <div className="salary-item">
-                            <p>
-                                {dollar}{minIncome}
-                            </p>
-                            <p>
-                                {dollar}{maxIncome}
-                            </p>
-                        </div>
-                        <h2 className="salary-title">Min <span>Expense</span> Max</h2>
-                        <div className="salary-item">
-                            <p>
-                                {dollar}{minExpense}
-                            </p>
-                            <p>
-                                {dollar}{maxExpense}
-                            </p>
-                        </div>
-                    </div> */}
+                    
                 </div>
             </InnerLayout>
         </DashboardStyled>
@@ -90,54 +71,56 @@ function Dashboard() {
 }
 
 const DashboardStyled = styled.div`
-    .stats-con{
+    .stats-con {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 2rem;
 
-        .chart-con{
+        .chart-con {
             height: 400px;
-            .amount-con{
+
+            .amount-con {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
                 gap: 1rem;
                 margin-top: 2rem;
 
-                .income, .expense, .balance{
+                .income, .expense, .balance {
                     background: #FCF6F9;
                     border: 2px solid #FFFFFF;
                     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
                     border-radius: 20px;
                     padding: 1rem;
                     text-align: center;
-                    p{
+
+                    p {
                         font-size: 2.5rem;
                         font-weight: 700;
                     }
                 }
 
-                .balance{
-                    p{
+                .balance {
+                    p {
                         font-size: 3rem;
                     }
                 }
             }
         }
 
-        .history-con{
-            h2{
+        .history-con {
+            h2 {
                 margin: 1rem 0;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
             }
-            .salary-title{
+            .salary-title {
                 font-size: 1rem;
-                span{
+                span {
                     font-size: 1.5rem;
                 }
             }
-            .salary-item{
+            .salary-item {
                 background: #FCF6F9;
                 border: 2px solid #FFFFFF;
                 box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
@@ -146,7 +129,8 @@ const DashboardStyled = styled.div`
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                p{
+
+                p {
                     font-weight: 600;
                     font-size: 1.2rem;
                 }
@@ -174,8 +158,10 @@ const DashboardStyled = styled.div`
         .chart-con {
             height: auto;
             .amount-con {
+                /* Show amounts in two columns on tablets */
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
+
                 p {
                     font-size: 2rem;
                 }
@@ -185,6 +171,7 @@ const DashboardStyled = styled.div`
             .salary-item {
                 flex-direction: column;
                 align-items: center;
+
                 p {
                     font-size: 1rem;
                 }
@@ -195,7 +182,14 @@ const DashboardStyled = styled.div`
     @media (max-width: 480px) {
         .chart-con {
             .amount-con {
+                /* Stack amounts vertically in one column on mobile */
                 grid-template-columns: 1fr;
+                gap: 0.75rem;
+
+                .income, .expense, .balance {
+                    padding: 0.75rem;
+                }
+
                 p {
                     font-size: 1.5rem;
                 }
@@ -217,6 +211,4 @@ const DashboardStyled = styled.div`
         }
     }
 `;
-
-
 export default Dashboard;
